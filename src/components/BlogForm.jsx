@@ -7,6 +7,7 @@ export default function BlogForm({ handleFormSubmit, initialForm }) {
     return (
 
         <form
+            className='w-3/4 mx-auto'
             onSubmit={e => handleFormSubmit(e, form, setForm)}
         >
             <div className='mb-6'>

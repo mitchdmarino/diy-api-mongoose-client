@@ -1,7 +1,8 @@
 import {useState} from 'react'
 import CommentForm from './CommentForm'
 
-export default function Comment ({comment, handleSubmit, handleDelete, showEditForm, setShowEditForm}) {
+export default function Comment ({comment, handleSubmit, handleDelete}) {
+    const [showEditForm, setShowEditForm] = useState(false)
     return (
         <div>
             {
@@ -11,7 +12,9 @@ export default function Comment ({comment, handleSubmit, handleDelete, showEditF
                     <li>{comment.content}</li>                    
                 </div>   
             }
-            <button onClick={() => setShowEditForm(!showEditForm)}>
+            <button 
+                className='bg-gray-400 m-2 border-solid border-2 border-black px-2 block '
+                onClick={() => setShowEditForm(!showEditForm)}>
                 {
                     showEditForm ? 
                     'Back': 
@@ -21,6 +24,7 @@ export default function Comment ({comment, handleSubmit, handleDelete, showEditF
             {
                 showEditForm ? 
                 <button
+                    className='bg-gray-400 m-2 border-solid border-2 border-black block '
                     onClick={() => handleDelete(comment)}
                 >Delete</button> : 
                 ''
