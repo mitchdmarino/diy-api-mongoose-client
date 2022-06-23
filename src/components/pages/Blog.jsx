@@ -12,6 +12,7 @@ export default function Blog() {
     const [blog, setBlog] = useState({})
     // state to either render blog edit form or blog details
     const [showForm, setShowForm] = useState(false)
+    const [showEditForm, setShowEditForm] = useState(false)
     // Comment 
    
     
@@ -60,12 +61,13 @@ export default function Blog() {
             })
     }
     // Edit a comment on this blog
-    const handleEditComment = (e, commentForm, setCommentForm) => {
+    const handleEditComment = (e, commentForm) => {
         e.preventDefault()
         console.log(commentForm)
         axios.put(`${process.env.REACT_APP_BLOG_URL}/comment/${commentForm._id}`, commentForm)
             .then(response => {
                 setBlog(response.data)
+                setShowEditForm(false)
             })
     }
     
@@ -85,7 +87,12 @@ export default function Blog() {
             {
                 showForm ?
                 <BlogForm handleFormSubmit={handleEditBlog} initialForm={blog}/> : 
-                <BlogDetails blog={blog} handleEditComment={handleEditComment} handleDeleteComment={handleDeleteComment}/>
+                <BlogDetails blog={blog} 
+                    handleEditComment={handleEditComment} 
+                    handleDeleteComment={handleDeleteComment} 
+                    showEditForm={showEditForm}
+                    setShowEditForm={setShowEditForm}
+                />
             }
             
             <button onClick={() => setShowForm(!showForm)}>
@@ -103,7 +110,9 @@ export default function Blog() {
                 ''
             }
             <div className='comments'>
-                <CommentForm handleSubmit={handleAddComment} initialForm={{content: ''}}/> 
+                <CommentForm 
+                    handleSubmit={handleAddComment} 
+                    initialForm={{content: ''}}/> 
 
             </div>
         </div>

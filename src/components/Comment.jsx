@@ -1,13 +1,12 @@
 import {useState} from 'react'
 import CommentForm from './CommentForm'
 
-export default function Comment ({comment, handleSubmit, handleDelete, blogId}) {
-    const [showEditForm, setShowEditForm] = useState(false)
+export default function Comment ({comment, handleSubmit, handleDelete, showEditForm, setShowEditForm}) {
     return (
         <div>
             {
                 showEditForm ? 
-                <CommentForm key={`${comment.id}`}initialForm={comment} handleSubmit={handleSubmit}/>:
+                <CommentForm key={`${comment.id}`}initialForm={comment} handleSubmit={handleSubmit} />:
                 <div className="comment-container">
                     <li>{comment.content}</li>                    
                 </div>   
@@ -16,7 +15,7 @@ export default function Comment ({comment, handleSubmit, handleDelete, blogId}) 
                 {
                     showEditForm ? 
                     'Back': 
-                    'Show me the formular'
+                    'Edit'
                 }
             </button>
             {

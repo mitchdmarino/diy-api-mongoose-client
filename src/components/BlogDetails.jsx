@@ -6,7 +6,14 @@ export default function BlogDetails(props) {
     if (blog.comments) {
         comments = blog.comments.map(comment => {
             return (
-                <Comment comment={comment} blogId={blog._id} handleSubmit={props.handleEditComment} handleDelete={props.handleDeleteComment}/>
+                <Comment 
+                    key={`comment-${comment._id}`}
+                    comment={comment} 
+                    blogId={blog._id} 
+                    handleSubmit={props.handleEditComment} 
+                    handleDelete={props.handleDeleteComment} 
+                    showEditForm={props.showEditForm} 
+                    setShowEditForm={props.setShowEditForm}/>
             )
     })}
     return (
